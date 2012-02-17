@@ -1,0 +1,78 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
+<style type = "text/css">
+body{
+	background-color:#000;
+	color:#00ff00;
+	font-family:courier;
+	padding:10px;
+	width:750px;
+	margin-left:auto;
+	margin-right:atuo;
+}
+
+input{
+	color:#00ff00;
+	font-family:courier;
+	background-color:#000;
+}
+
+</style>
+
+</head>
+
+<body>
+binding energy<br/>
+<input type="text" id="a" placeholder="a number"/>
+<br/>
+<input type="text" id="z" placeholder="z number"/>
+<br/>
+<input type="text" id="m" placeholder="atomic mass"/>
+<br/>
+<div id="answer">
+
+</div>
+<script>
+var a = 0;
+var z = 0;
+var m = 0; 
+var x = 0; 
+var y = 0;
+var n = 0; 
+var e = 0; 
+var e2 = 0; 
+
+function answer(a, z, m){
+	x = z * 0.00054875;
+	x = m - x; 
+	y = (a-z)*(1.008665);
+	y = (z*1.007825) + y; 
+	n = x - y;
+
+	e = (n * ((300000000)*(300000000)))/(6.022*(Math.pow(10,23)));
+	e /= 1000; 
+	e *= -1; 
+	
+	e2 = e/a; 
+
+	$("#answer").html("Delta m: "+n+"<br/>"+"Delta e: "+e+"<br/>"+"J/nucleon: "+e2);
+}
+
+// N*(3e8)^2/(6.022e23)/1000->E
+// Disp E (E is Delta E)
+// Then, E/A->E
+// Disp E (Now E is J/nucleon
+// N is in amu, E is in J
+// And the second E is in J/nucleon
+
+$(document).ready(function(){
+	$("#a, #z, #m").keyup(function(){
+		answer($("#a").val(), $("#z").val(), $("#m").val())
+	})
+
+});
+</script>
+
+</body>
+</html>
